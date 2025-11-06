@@ -11,7 +11,7 @@ const handleDelete = (id: number) => {
 
 <template>
   <table class="min-w-full border border-gray-200">
-    <thead class="bg-gray-100">
+    <thead class="bg-gray-100 text-gray-700 uppercase text-sm font-semibold">
       <tr>
         <th class="py-2 px-4 text-left">Title</th>
         <th class="py-2 px-4 text-left">Status</th>
@@ -20,7 +20,7 @@ const handleDelete = (id: number) => {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="blog in blogs" :key="blog.id" class="border-t">
+      <tr v-for="blog in blogs" :key="blog.id" class="border-t hover:bg-gray-50 transition-colors duration-150">
         <td><router-link class="py-2 px-4 rounded-lg hover:bg-blue-200 cursor-pointer" :to="`/blogdetail/${blog.id}`">{{ blog.title }}</router-link></td>
         <td class="py-2 px-4" :class="blog?.status === 'public' ? 'text-green-600 font-semibold' : 'text-orange-800 font-semibold'">{{ blog.status }}</td>
         <td class="py-2 px-4">{{ blog.createdAt }}</td>
@@ -32,3 +32,7 @@ const handleDelete = (id: number) => {
     </tbody>
   </table>
 </template>
+
+<script lang="ts">
+export default {};
+</script>
