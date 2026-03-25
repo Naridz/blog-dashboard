@@ -23,7 +23,7 @@ const defaultBlogs : Blog[] = [
   },
   {
     id: 3,
-    title: 'Test 50',
+    title: 'Lorem 50',
     content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mattis nunc nisi, at molestie elit dapibus eu. Aliquam gravida condimentum nulla. 
               Donec pharetra tempor posuere. Fusce interdum egestas cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
               Proin volutpat mi sapien, in lobortis enim vulputate vel. Curabitur finibus sodales neque.`,
