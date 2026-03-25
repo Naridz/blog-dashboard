@@ -3,71 +3,104 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { login } from '../auth';
 import type { User } from '../auth';
+import { User as UserIcon, Lock, LogIn, AlertCircle } from 'lucide-vue-next'
 
 const username = ref<string>('')
 const password = ref<string>('')
 const error = ref('')
+const isLoading = ref(false)
 const router = useRouter();
 
-const handleLogin = (e:Event) =>{
+const handleLogin = async (e:Event) =>{
   e.preventDefault();
+  error.value = ''
 
   if (!username.value || !password.value) {
-    error.value = "Complete all your inputs"
+    error.value = "Please complete all fields"
     return
   }
+
+  isLoading.value = true
+  
+  await new Promise(resolve => setTimeout(resolve, 500))
 
   const users:User[] = JSON.parse(localStorage.getItem('users') || '[]')
   const user = users.find((u) => u.username === username.value && u.password === password.value )
 
   if (!user) {
     error.value = 'Invalid username or password'
+    isLoading.value = false
     return
   }
   
   login(user)
-  alert("Login success")
   router.push('/blog')
 }
 </script>
 
 <template>
-    <div class="flex flex-col items-center">
-        <div class="w-[400px] bg-white shadow-xl p-10 mt-5 rounded-xl border border-slate-300">
-          <h3 class="text-2xl font-semibold ">Login</h3>
-          <hr class="my-4 text-gray-200" />
-          <form @submit="handleLogin">
-
-            <div v-if="error" class="bg-red-600 w-fit text-white text-sm py-1 px-3 mt-2 rounded-md">
-              {{error}}
+  <div class="flex justify-center p-4">
+    <div class="w-full max-w-md">
+      <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+        <div class="bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white">
+          <h1 class="text-2xl font-bold">Welcome Back</h1>
+          <p class="text-emerald-50 mt-1">Sign in to your account</p>
+        </div>
+        
+        <div class="p-6">
+          <form @submit="handleLogin" class="space-y-4">
+            <div v-if="error" class="flex items-center gap-2 bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm border border-red-200">
+              <AlertCircle class="w-4 h-4 flex-shrink-0" />
+              <span>{{ error }}</span>
             </div>
             
-            <input
-              type="text"
-              v-model="username"
-              class="w-full bg-gray-200 py-2 px-3 rounded text-lg my-2"
-              placeholder="Enter your username"
-            />
-            <input
-              type="password"
-              v-model="password"
-              class="w-full bg-gray-200 py-2 px-3 rounded text-lg my-2"
-              placeholder="Enter your password"
-            />
+            <div class="space-y-1">
+              <label class="text-sm font-medium text-slate-700">Username</label>
+              <div class="relative">
+                <UserIcon class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                <input
+                  v-model="username"
+                  type="text"
+                  class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
+                  placeholder="Enter your username"
+                />
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <label class="text-sm font-medium text-slate-700">Password</label>
+              <div class="relative">
+                <Lock class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                <input
+                  v-model="password"
+                  type="password"
+                  class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
+                  placeholder="Enter your password"
+                />
+              </div>
+            </div>
+
             <button
               type="submit"
-              class="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-3 my-3 rounded-lg text-lg font-medium shadow-md hover:shadow-lg transition-all"
+              :disabled="isLoading"
+              class="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white py-3 px-4 rounded-lg font-medium shadow-md hover:shadow-lg transition-all disabled:cursor-not-allowed"
             >
-              Sign In
+              <LogIn v-if="!isLoading" class="w-5 h-5" />
+              <span v-if="isLoading" class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+              <span>{{ isLoading ? 'Signing in...' : 'Sign In' }}</span>
             </button>
-            <hr class="my-4 text-gray-200" />
-            <p class="text-center">
-                Don’t have an account?
-              <router-link class="text-blue-600 hover:underline font-medium" to="/register">
+          </form>
+
+          <div class="mt-6 pt-6 border-t border-slate-100">
+            <p class="text-center text-slate-600 text-sm">
+              Don't have an account?
+              <router-link class="text-emerald-600 hover:text-emerald-700 font-medium ml-1 transition-colors" to="/register">
                 Register
               </router-link>
             </p>
-          </form>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
