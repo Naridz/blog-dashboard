@@ -96,7 +96,7 @@ const handleSubmit = () => {
                   <label class="flex items-center gap-3 px-4 py-3 rounded-xl border-2 cursor-pointer transition-all" :class="status === 'unpublic' ? 'border-amber-400/60 bg-amber-400/10' : 'border-white/20 hover:border-white/30 bg-white/5'">
                     <input type="radio" v-model="status" value="unpublic" class="w-4 h-4 text-amber-400 focus:ring-amber-400/50 bg-transparent border-white/30" />
                     <div>
-                      <span class="font-medium text-white">Draft</span>
+                      <span class="font-medium text-white">Unpublic</span>
                       <p class="text-xs text-white/50">Only you can see</p>
                     </div>
                   </label>

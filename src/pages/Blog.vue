@@ -102,22 +102,22 @@ const handleDelete = (id:number) => {
                 </div>
                 
                 <!-- Status Filter -->
-                <div class="flex gap-1 bg-white/10 rounded-xl p-1">
+                <div class="flex gap-1 bg-white/10 rounded-xl p-1 w-full sm:w-auto">
                   <button 
                     @click="statusBlog = 'all'"
-                    :class="['px-4 py-2 rounded-lg font-medium text-sm transition-all', statusBlog === 'all' ? 'bg-white/20 text-white shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
+                    :class="['flex-1 sm:flex-initial px-3 sm:px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap text-center', statusBlog === 'all' ? 'bg-white/20 text-white shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
                   >
                     All
                   </button>
                   <button 
                     @click="statusBlog = 'public'"
-                    :class="['px-4 py-2 rounded-lg font-medium text-sm transition-all', statusBlog === 'public' ? 'bg-white/20 text-emerald-300 shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
+                    :class="['flex-1 sm:flex-initial px-3 sm:px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap text-center', statusBlog === 'public' ? 'bg-white/20 text-emerald-300 shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
                   >
                     Public
                   </button>
                   <button 
                     @click="statusBlog = 'unpublic'"
-                    :class="['px-4 py-2 rounded-lg font-medium text-sm transition-all', statusBlog === 'unpublic' ? 'bg-white/20 text-amber-300 shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
+                    :class="['flex-1 sm:flex-initial px-3 sm:px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap text-center', statusBlog === 'unpublic' ? 'bg-white/20 text-amber-300 shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
                   >
                     Unpublic
                   </button>
