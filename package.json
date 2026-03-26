@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
+    "@fontsource/noto-sans-thai": "^5.2.8",
     "@tailwindcss/vite": "^4.1.16",
     "lucide-vue-next": "^1.0.0",
     "tailwindcss": "^4.1.16",

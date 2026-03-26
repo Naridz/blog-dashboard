@@ -1,7 +1,8 @@
 <script setup>
 import Logo from '../assets/vue.svg'
 import { useRouter } from 'vue-router';
-import { logout, isLoggedIn} from '../auth';
+import { logout, isLoggedIn } from '../auth';
+import { LayoutGrid, LogOut } from 'lucide-vue-next';
 
 const router = useRouter()
 
@@ -14,23 +15,23 @@ const handleLogout = (e) => {
 </script>
 
 <template>
-    <nav class="bg-white border-b border-gray-200 shadow-sm">
+    <nav class="bg-white/10 backdrop-blur-md border-b border-white/15 sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <router-link to="/">
-                    <img :src="Logo" alt="Logo" class="rounded-full shadow-md shadow-green-300 hover:scale-110 hover:shadow-green-500 transition-all duration-300"/>
+                    <img :src="Logo" alt="Logo" class="rounded-full shadow-md shadow-emerald-500/30 hover:scale-110 hover:shadow-emerald-400/50 transition-all duration-300"/>
                 </router-link>
                 
                 <div v-if="!isLoggedIn" class="flex items-center gap-3">
                     <router-link 
                         to="/login" 
-                        class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-all shadow-sm shadow-indigo-200"
+                        class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-500/30"
                     >
                         Sign In
                     </router-link>
                     <router-link 
                         to="/register" 
-                        class="px-5 py-2.5 rounded-xl border-2 border-gray-200 text-gray-700 font-medium hover:border-indigo-200 hover:text-indigo-600 hover:bg-indigo-50/50 transition-all"
+                        class="px-5 py-2.5 rounded-xl border border-white/30 text-white/90 font-medium hover:border-indigo-400 hover:text-white hover:bg-indigo-500/20 transition-all"
                     >
                         Sign Up
                     </router-link>
@@ -42,22 +43,18 @@ const handleLogout = (e) => {
                         :class="[
                             'flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium transition-all',
                             $route.path === '/blog' 
-                                ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' 
-                                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                                ? 'bg-indigo-500/30 text-indigo-200 border border-indigo-400/40' 
+                                : 'text-white/70 hover:bg-white/10 hover:text-white'
                         ]"
                     >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
-                        </svg>
+                        <LayoutGrid class="w-5 h-5" />
                         Blog
                     </router-link>
                     <button 
                         @click="handleLogout" 
-                        class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-rose-50 text-rose-600 font-medium hover:bg-rose-100 transition-all"
+                        class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-rose-500/20 text-rose-200 font-medium hover:bg-rose-500/30 transition-all"
                     >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                        </svg>
+                        <LogOut class="w-5 h-5" />
                         Logout
                     </button>
                 </div>

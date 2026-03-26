@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Blog } from '../mockData/blogs';
+import { Pencil, Trash2 } from 'lucide-vue-next';
 
 const props = defineProps< {blog: Blog }>()
 const emit = defineEmits<{ (e: 'delete', id: number): void }>()
@@ -11,50 +12,46 @@ const handleDelete = () => {
 </script>
 
 <template>
-  <div class="group bg-white rounded-2xl p-5 flex flex-col justify-between min-h-[280px] shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-gray-200 hover:-translate-y-1">
+  <div class="group bg-white/10 backdrop-blur-sm rounded-2xl p-5 flex flex-col justify-between min-h-[280px] shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 border border-white/15 hover:border-white/25 hover:-translate-y-0.5">
     <div>
       <div class="flex items-start justify-between mb-4">
         <span 
           :class="[
-            'px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide',
+            'px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide ring-1',
             props.blog.status === 'public' 
-              ? 'bg-emerald-100 text-emerald-700' 
-              : 'bg-amber-100 text-amber-700'
+              ? 'bg-emerald-400/20 text-emerald-200 ring-emerald-400/30' 
+              : 'bg-amber-400/20 text-amber-200 ring-amber-400/30'
           ]"
         >
           {{ props.blog.status }}
         </span>
-        <span class="text-gray-400 text-xs">{{ props.blog.createdAt }}</span>
+        <span class="text-white/50 text-xs">{{ props.blog.createdAt }}</span>
       </div>
       
       <router-link
         :to="`/blogdetail/${props.blog.id}`"
-        class="block text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-indigo-600 transition-colors leading-tight"
+        class="block text-xl font-bold text-white mb-3 line-clamp-2 hover:text-indigo-300 transition-colors leading-tight"
       >
         {{ props.blog.title }}
       </router-link>
       
-      <p class="text-gray-600 text-sm leading-relaxed line-clamp-4">{{ props.blog.content }}</p>
+      <p class="text-white/70 text-sm leading-relaxed line-clamp-4">{{ props.blog.content }}</p>
     </div>
 
-    <div class="flex items-center justify-between pt-4 mt-4 border-t border-gray-100">
+    <div class="flex items-center justify-between pt-4 mt-4 border-t border-white/10">
       <div class="flex gap-2">
         <router-link 
           :to="`/edit/${props.blog.id}`" 
-          class="flex items-center gap-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          class="flex items-center gap-1.5 bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-          </svg>
+          <Pencil class="w-4 h-4" />
           Edit
         </router-link>
         <button 
           @click="handleDelete" 
-          class="flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 text-rose-600 px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer"
+          class="flex items-center gap-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer"
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-          </svg>
+          <Trash2 class="w-4 h-4" />
           Delete
         </button>
       </div>

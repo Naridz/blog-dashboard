@@ -4,6 +4,7 @@ import { getBlogs, saveBlogs } from '../mockData/blogs';
 import Card from '../components/Card.vue';
 import Table from '../components/Table.vue';
 import type { Blog } from '../mockData/blogs';
+import { Plus, Search, X, LayoutGrid, Table as TableIcon, Layout, CheckCircle } from 'lucide-vue-next';
 
 const allBlog = ref<Blog[]>([])
 const searchKeyword = ref<string>('')
@@ -47,86 +48,76 @@ const handleDelete = (id:number) => {
         <div class="mb-8">
           <div class="flex items-center justify-between mb-6">
             <div>
-              <h1 class="text-2xl font-bold text-gray-900">Blog Posts</h1>
-              <p class="text-gray-500 mt-1">Manage and organize your blog content</p>
+              <h1 class="text-2xl font-bold text-white">Blog Posts</h1>
+              <p class="text-white/60 mt-1">Manage and organize your blog content</p>
             </div>
             <router-link 
               to="/create" 
-              class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 px-5 rounded-xl font-medium transition-all shadow-sm shadow-indigo-200"
+              class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 px-5 rounded-xl font-medium transition-all shadow-lg shadow-indigo-500/30"
             >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-              </svg>
+              <Plus class="w-5 h-5" />
               Create New Post
             </router-link>
           </div>
           
           <!-- Toolbar -->
-          <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg shadow-black/20 border border-white/15 p-4">
             <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
               <!-- Search -->
               <div class="relative flex-1 lg:w-80">
-                <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
+                <Search class="w-5 h-5 text-white/40 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   v-model="searchKeyword"
                   placeholder="Search posts..."
-                  class="w-full bg-gray-50 border border-gray-200 rounded-xl py-2.5 pl-10 pr-10 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all"
+                  class="w-full bg-white/10 border border-white/20 rounded-xl py-2.5 pl-10 pr-10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-transparent transition-all"
                 />
                 <button
                   v-if="searchKeyword"
                   @click="clearSearch"
                   type="button"
-                  class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-500 transition-colors"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white/60 transition-colors"
                 >
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                  </svg>
+                  <X class="w-3 h-3" />
                 </button>
               </div>
               
               <div class="flex items-center gap-3 w-full lg:w-auto">
                 <!-- View Toggle -->
-                <div class="flex gap-1 bg-gray-100 rounded-xl p-1">
+                <div class="flex gap-1 bg-white/10 rounded-xl p-1">
                   <button 
                     @click="switchMode = 'card'" 
-                    :class="['flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all', switchMode === 'card' ? 'bg-white text-indigo-600 shadow-sm' : 'text-gray-600 hover:text-gray-900']"
+                    :class="['flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all', switchMode === 'card' ? 'bg-white/20 text-white shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
                   >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
-                    </svg>
+                    <LayoutGrid class="w-4 h-4" />
                     Card
                   </button>
                   <button 
                     @click="switchMode = 'table'" 
-                    :class="['flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all', switchMode === 'table' ? 'bg-white text-indigo-600 shadow-sm' : 'text-gray-600 hover:text-gray-900']"
+                    :class="['flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all', switchMode === 'table' ? 'bg-white/20 text-white shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
                   >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7-4h14M4 6h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z"/>
-                    </svg>
+                    <TableIcon class="w-4 h-4" />
                     Table
                   </button>
                 </div>
                 
                 <!-- Status Filter -->
-                <div class="flex gap-1 bg-gray-100 rounded-xl p-1">
+                <div class="flex gap-1 bg-white/10 rounded-xl p-1">
                   <button 
                     @click="statusBlog = 'all'"
-                    :class="['px-4 py-2 rounded-lg font-medium text-sm transition-all', statusBlog === 'all' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900']"
+                    :class="['px-4 py-2 rounded-lg font-medium text-sm transition-all', statusBlog === 'all' ? 'bg-white/20 text-white shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
                   >
                     All
                   </button>
                   <button 
                     @click="statusBlog = 'public'"
-                    :class="['px-4 py-2 rounded-lg font-medium text-sm transition-all', statusBlog === 'public' ? 'bg-white text-emerald-600 shadow-sm' : 'text-gray-600 hover:text-gray-900']"
+                    :class="['px-4 py-2 rounded-lg font-medium text-sm transition-all', statusBlog === 'public' ? 'bg-white/20 text-emerald-300 shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
                   >
                     Public
                   </button>
                   <button 
                     @click="statusBlog = 'unpublic'"
-                    :class="['px-4 py-2 rounded-lg font-medium text-sm transition-all', statusBlog === 'unpublic' ? 'bg-white text-amber-600 shadow-sm' : 'text-gray-600 hover:text-gray-900']"
+                    :class="['px-4 py-2 rounded-lg font-medium text-sm transition-all', statusBlog === 'unpublic' ? 'bg-white/20 text-amber-300 shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
                   >
                     Unpublic
                   </button>
@@ -137,22 +128,18 @@ const handleDelete = (id:number) => {
         </div>
         
         <!-- Success Message -->
-        <div v-if="success" class="bg-emerald-50 border border-emerald-200 text-emerald-700 py-3 px-4 rounded-xl mb-6 flex items-center gap-2 max-w-md">
-          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
+        <div v-if="success" class="bg-emerald-500/10 border border-emerald-400/20 text-emerald-200 py-3 px-4 rounded-xl mb-6 flex items-center gap-2 max-w-md backdrop-blur-sm">
+          <CheckCircle class="w-5 h-5 flex-shrink-0" />
           {{success}}
         </div>
         
         <!-- Empty State -->
         <div v-if="filteredBlogs.length === 0" class="text-center py-16">
-          <div class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
-            </svg>
+          <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <Layout class="w-8 h-8 text-white/40" />
           </div>
-          <h3 class="text-lg font-medium text-gray-900 mb-1">No blogs found</h3>
-          <p class="text-gray-500">Try adjusting your search or filters</p>
+          <h3 class="text-lg font-medium text-white mb-1">No blogs found</h3>
+          <p class="text-white/50">Try adjusting your search or filters</p>
         </div>
         
         <!-- Content -->
