@@ -82,19 +82,19 @@ const handleDelete = (id:number) => {
                 </button>
               </div>
               
-              <div class="flex items-center gap-3 w-full lg:w-auto">
+              <div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-3 w-full lg:w-auto">
                 <!-- View Toggle -->
-                <div class="flex gap-1 bg-white/10 rounded-xl p-1">
+                <div class="flex gap-1 bg-white/10 rounded-xl p-1 w-full lg:w-auto">
                   <button 
                     @click="switchMode = 'card'" 
-                    :class="['flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all', switchMode === 'card' ? 'bg-white/20 text-white shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
+                    :class="['flex-1 lg:flex-initial flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium transition-all', switchMode === 'card' ? 'bg-white/20 text-white shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
                   >
                     <LayoutGrid class="w-4 h-4" />
                     Card
                   </button>
                   <button 
                     @click="switchMode = 'table'" 
-                    :class="['flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all', switchMode === 'table' ? 'bg-white/20 text-white shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
+                    :class="['flex-1 lg:flex-initial flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium transition-all', switchMode === 'table' ? 'bg-white/20 text-white shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
                   >
                     <TableIcon class="w-4 h-4" />
                     Table
@@ -105,19 +105,19 @@ const handleDelete = (id:number) => {
                 <div class="flex gap-1 bg-white/10 rounded-xl p-1 w-full sm:w-auto">
                   <button 
                     @click="statusBlog = 'all'"
-                    :class="['flex-1 sm:flex-initial px-3 sm:px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap text-center', statusBlog === 'all' ? 'bg-white/20 text-white shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
+                    :class="['flex-1 lg:flex-initial px-3 sm:px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap text-center', statusBlog === 'all' ? 'bg-white/20 text-white shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
                   >
                     All
                   </button>
                   <button 
                     @click="statusBlog = 'public'"
-                    :class="['flex-1 sm:flex-initial px-3 sm:px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap text-center', statusBlog === 'public' ? 'bg-white/20 text-emerald-300 shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
+                    :class="['flex-1 lg:flex-initial px-3 sm:px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap text-center', statusBlog === 'public' ? 'bg-white/20 text-emerald-300 shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
                   >
                     Public
                   </button>
                   <button 
                     @click="statusBlog = 'unpublic'"
-                    :class="['flex-1 sm:flex-initial px-3 sm:px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap text-center', statusBlog === 'unpublic' ? 'bg-white/20 text-amber-300 shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
+                    :class="['flex-1 lg:flex-initial px-3 sm:px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap text-center', statusBlog === 'unpublic' ? 'bg-white/20 text-amber-300 shadow-sm' : 'text-white/60 hover:text-white hover:bg-white/10']"
                   >
                     Unpublic
                   </button>
